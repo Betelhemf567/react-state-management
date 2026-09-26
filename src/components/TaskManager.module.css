@@ -1,0 +1,26 @@
+.container {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.light {
+  background: white;
+  color: black;
+}
+
+.dark {
+  background: #242629;
+  color: white;
+}
+
+input {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 8px;
+  margin: 5px;
+}
