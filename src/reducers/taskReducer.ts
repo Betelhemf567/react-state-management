@@ -6,8 +6,14 @@ export type Task = {
 type State = Task[];
 
 type Action =
-  | { type: "add"; payload: string }
-  | { type: "remove"; payload: number };
+  | {
+      type: "add";
+      payload: string;
+    }
+  | {
+      type: "remove";
+      payload: number;
+    };
 
 export function taskReducer(
   state: State,
@@ -29,6 +35,6 @@ export function taskReducer(
       );
 
     default:
-      throw new Error("Unknown action");
+      throw new Error("Unknown action type");
   }
 }

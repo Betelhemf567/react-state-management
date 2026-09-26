@@ -7,12 +7,9 @@ function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      <h2>React State Manager</h2>
+      <h2 className={styles.brand}>React State Manager</h2>
 
-      <button
-        className={styles.button}
-        onClick={toggleTheme}
-      >
+      <button className={styles.button} onClick={toggleTheme}>
         Switch to {theme === LIGHT_THEME ? DARK_THEME : LIGHT_THEME}
       </button>
     </nav>

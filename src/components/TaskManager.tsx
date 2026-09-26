@@ -11,55 +11,86 @@ function TaskManager() {
   const { theme } = useTheme();
 
   const addTask = () => {
-    if (!task.trim()) return;
+    const trimmedTask = task.trim();
+
+    if (!trimmedTask) {
+      return;
+    }
 
     dispatch({
       type: "add",
-      payload: task,
+      payload: trimmedTask,
     });
 
     setTask("");
   };
 
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === "Enter") {
+      addTask();
+    }
+  };
+
   return (
-    <div
+    <main
       className={`${styles.container} ${
         theme === LIGHT_THEME
           ? styles.light
           : styles.dark
       }`}
     >
-      <h2>Task Manager</h2>
+      <h2 className={styles.title}>Task Manager</h2>
 
-      <input
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-        placeholder="Enter task"
-      />
+      <div className={styles.inputSection}>
+        <input
+          className={styles.input}
+          type="text"
+          value={task}
+          onChange={(event) => setTask(event.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Enter task"
+        />
 
-      <button onClick={addTask}>
-        Add Task
-      </button>
+        <button
+          className={styles.addButton}
+          onClick={addTask}
+          disabled={!task.trim()}
+        >
+          Add Task
+        </button>
+      </div>
 
-      <ul>
-        {tasks.map((t) => (
-          <li key={t.id}>
-            {t.text}
-
-            <button
-              onClick={() =>
-                dispatch({
-                  type: "remove",
-                  payload: t.id,
-                })
-              }
+      {tasks.length === 0 ? (
+        <p className={styles.emptyMessage}>
+          No tasks yet. Add a task above.
+        </p>
+      ) : (
+        <ul className={styles.taskList}>
+          {tasks.map((currentTask) => (
+            <li
+              className={styles.taskItem}
+              key={currentTask.id}
             >
-              X
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+              <span>{currentTask.text}</span>
+
+              <button
+                className={styles.removeButton}
+                onClick={() =>
+                  dispatch({
+                    type: "remove",
+                    payload: currentTask.id,
+                  })
+                }
+              >
+                X
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </main>
   );
 }
 

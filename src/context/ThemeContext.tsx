@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState } from "react";
+import type { ReactNode } from "react";
 import { LIGHT_THEME, DARK_THEME } from "../constants/theme";
 
 type Theme = typeof LIGHT_THEME | typeof DARK_THEME;
@@ -14,8 +15,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(LIGHT_THEME);
 
   const toggleTheme = () => {
-    setTheme((prev) =>
-      prev === LIGHT_THEME ? DARK_THEME : LIGHT_THEME
+    setTheme((previousTheme) =>
+      previousTheme === LIGHT_THEME ? DARK_THEME : LIGHT_THEME
     );
   };
 

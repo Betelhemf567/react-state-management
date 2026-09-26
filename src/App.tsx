@@ -9,17 +9,11 @@ function App() {
 
   return (
     <div
-      style={{
-        minHeight: "100vh",
-        background:
-          theme === LIGHT_THEME
-            ? "#FFFFFF"
-            : "#242629",
-        color:
-          theme === LIGHT_THEME
-            ? "#000000"
-            : "#FFFFFF",
-      }}
+      className={
+        theme === LIGHT_THEME
+          ? "app light-app"
+          : "app dark-app"
+      }
     >
       <Navbar />
       <TaskManager />
